@@ -18,38 +18,41 @@ concurrency:
 
 jobs:
   build:
-    name: Build and Test
+    name: Build
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-
       - name: Set up JDK
         uses: actions/setup-java@v4
         with:
           distribution: temurin
           java-version: '21'
-
       - name: Set up Gradle
         uses: gradle/actions/setup-gradle@v3
         with:
           gradle-version: 8.7
+      - name: Build
+        run: ./gradlew clean build -x test
 
-      - name: Validate Gradle wrapper
-        if: ${{ hashFiles('gradlew') != '' }}
-        uses: gradle/actions/wrapper-validation@v3
-
-      - name: Run Gradle build
-        env:
-          GRADLE_OPTS: '-Dorg.gradle.daemon=false -Dorg.gradle.parallel=true -Dorg.gradle.jvmargs="-Xmx2g"'
-        run: |
-          if [ -x "./gradlew" ]; then
-            ./gradlew clean build
-          else
-            gradle --no-daemon clean build
-          fi
-
+  test:
+    name: Test
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Set up JDK
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Set up Gradle
+        uses: gradle/actions/setup-gradle@v3
+        with:
+          gradle-version: 8.7
+      - name: Run tests
+        run: ./gradlew test
       - name: Publish JUnit test report
         if: success() || failure()
         uses: actions/upload-artifact@v4
