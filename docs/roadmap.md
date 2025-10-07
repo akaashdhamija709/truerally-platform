@@ -1,4 +1,4 @@
-# CourtVision Delivery Roadmap
+# TrueRally Delivery Roadmap
 
 ## Phase 1 – MVP Foundations
 - Deliver Auth, Player, Coach (onboarding & associations), Organizer, Tournament, and Match services with REST APIs.

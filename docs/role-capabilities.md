@@ -1,4 +1,4 @@
-# CourtVision Role Capabilities and User Flows
+# TrueRally Role Capabilities and User Flows
 
 ## Player Role
 ### Core Capabilities
