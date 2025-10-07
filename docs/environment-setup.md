@@ -6,7 +6,7 @@ This walkthrough explains, step by step, how to prepare your workstation for the
 
 | Tool | Version | Why it is needed | Installation Notes |
 | --- | --- | --- | --- |
-| **Java Development Kit** | 17 LTS | Compiles and runs the Spring Boot services. | Use [Adoptium Temurin](https://adoptium.net/) or any distribution that ships a full JDK. Ensure `JAVA_HOME` points to the installation directory. |
+| **Java Development Kit** | 21 LTS | Compiles and runs the Spring Boot services. | Use [Adoptium Temurin](https://adoptium.net/) or any distribution that ships a full JDK. Ensure `JAVA_HOME` points to the installation directory. |
 | **Docker Engine** | 24.x or newer | Builds and runs container images locally. | Follow the [Docker Desktop](https://www.docker.com/products/docker-desktop/) installer on macOS/Windows or the [Linux Engine instructions](https://docs.docker.com/engine/install/). |
 | **Docker Compose plugin** | 2.x | Orchestrates the shared infrastructure containers (Postgres, Kafka, MinIO, Keycloak). | Included with modern Docker Desktop/Engine installations. On older setups install the legacy `docker-compose` binary and ensure it is available on your `PATH`. |
 | **Gradle (local install or wrapper)** | 8.7+ | Builds services and runs tests. | A skeletal multi-module `build.gradle` and `settings.gradle` now live in the repository. Install Gradle 8.7+ locally (or use your IDE's bundled Gradle) until the `./gradlew` wrapper script is published with the first service module. |

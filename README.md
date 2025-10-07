@@ -20,6 +20,10 @@ Follow these steps the first time you set up the project:
 6. Build per-service Docker images with `docker build` or `bootBuildImage` as described in the environment guide, then run them against the compose-managed infrastructure.
 7. Export the environment variables documented in the compose manifest so services can connect to the shared stack.
 
+### Continuous Integration
+
+GitHub Actions runs the repository's CI workflow on every push and pull request targeting `main`. The pipeline installs Temurin JDK 21, executes `gradle clean build` (or `./gradlew` when the wrapper is present), and uploads JUnit XML/HTML reports. A follow-on job validates the Docker Compose manifest to catch configuration regressions early.
+
 ### Contributing
 - Open an issue describing the enhancement or bug prior to starting work.
 - Fork the repository or create a feature branch, keeping commits scoped and descriptive.
