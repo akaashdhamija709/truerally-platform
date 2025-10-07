@@ -1,4 +1,5 @@
 plugins {
+    id 'base'
     id 'org.springframework.boot' version '3.2.5' apply false
     id 'io.spring.dependency-management' version '1.1.4' apply false
 }
@@ -7,13 +8,12 @@ group = 'com.truerally'
 version = '0.1.0-SNAPSHOT'
 
 ext {
-    javaVersion = JavaVersion.VERSION_17
+    javaVersion = JavaVersion.VERSION_21
 }
 
 allprojects {
     group = rootProject.group
     version = rootProject.version
-
 }
 
 subprojects {
@@ -42,6 +42,13 @@ subprojects {
 }
 
 layout.buildDirectory = file("build")
+
+tasks.named('build') {
+    dependsOn(subprojects.collectMany { it.tasks.matching { it.name == 'build' } })
+}
+tasks.named('check') {
+    dependsOn(subprojects.collectMany { it.tasks.matching { it.name == 'check' } })
+}
 
 tasks.register('bootstrap') {
     group = 'Build Setup'
