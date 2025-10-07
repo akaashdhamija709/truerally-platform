@@ -1,7 +1,7 @@
-# CourtVision Platform Plan
+# TrueRally Platform Plan
 
 ## Overview
-CourtVision is a modular Spring Boot platform that orchestrates player management, tournament operations, match tracking, and ranking workflows for multiple racquet sports. The platform delivers RESTful APIs exclusively for all clients (mobile, web, admin) while maintaining a Kafka-centered event backbone for asynchronous workflows.
+TrueRally is a modular Spring Boot platform that orchestrates player management, tournament operations, match tracking, and ranking workflows for multiple racquet sports. The platform delivers RESTful APIs exclusively for all clients (mobile, web, admin) while maintaining a Kafka-centered event backbone for asynchronous workflows.
 
 ## High-Level Architecture
 - **API Gateway Layer**
@@ -30,7 +30,7 @@ CourtVision is a modular Spring Boot platform that orchestrates player managemen
   3. **Strong Typing & Tooling:** GraphQL schemas are strongly typed, empowering client-side code generation, validation, and documentation tooling.
   4. **Aggregated Views Across Services:** A GraphQL BFF can stitch data from multiple microservices into cohesive responses, reducing orchestration logic in clients.
 
-Although CourtVision will launch with REST-only interfaces, understanding these potential advantages keeps the door open for future adoption if aggregation complexity grows.
+Although TrueRally will launch with REST-only interfaces, understanding these potential advantages keeps the door open for future adoption if aggregation complexity grows.
 
 ## Service Responsibilities & Data Highlights
 | Service | Responsibilities | Key Tables / Collections | Kafka Topics (Pub/Sub) |

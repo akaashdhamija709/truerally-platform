@@ -3,18 +3,22 @@
 Backend microservices platform for racquet sports tracking.
 
 ## Planning Documents
-- [CourtVision Platform Plan](docs/courtvision-architecture.md)
-- [CourtVision Role Capabilities and User Flows](docs/role-capabilities.md)
-- [CourtVision Delivery Roadmap](docs/roadmap.md)
+- [TrueRally Platform Plan](docs/courtvision-architecture.md)
+- [TrueRally Role Capabilities and User Flows](docs/role-capabilities.md)
+- [TrueRally Delivery Roadmap](docs/roadmap.md)
 
 ## Developer Guide
 
 ### Local Development
-1. Install Java 17, Docker, and Docker Compose.
-2. Clone the repository and run `./gradlew build` to compile shared modules.
-3. Start supporting infrastructure and services with `docker compose up` (the compose file provisions Postgres, Kafka, MinIO, and Keycloak).
-4. Launch individual Spring Boot services locally using `./gradlew :service-name:bootRun`, pointing them at the compose-provided infrastructure via environment variables.
-5. Access the aggregated OpenAPI docs through the API Gateway once services are running.
+Follow these steps the first time you set up the project:
+
+1. Work through the [environment setup guide](docs/environment-setup.md) to install the JDK, Docker Engine, the Docker Compose plugin, and Gradle, then verify each tool is available on your `PATH`.
+2. Clone the repository and open it in your IDE.
+3. Today the repository does **not** ship a Compose manifest. If you need one before the platform team commits it, follow the [Compose manifest guidance](docs/docker-compose-guidance.md) to draft `compose.yml` in the repo root. Once the official file lands, replace your local draft with the shared version.
+4. After the shared Docker Compose manifest is available, run `docker compose pull` followed by `docker compose up -d` to provision Postgres, Kafka, MinIO, and Keycloak.
+5. The repository now ships a skeletal multi-module Gradle build. Until the wrapper is published, use a locally installed Gradle 8.7+ distribution and run `gradle clean build` to compile services and execute tests. Once the wrapper appears, switch to `./gradlew` so everyone runs the same version.
+6. Build per-service Docker images with `docker build` or `bootBuildImage` as described in the environment guide, then run them against the compose-managed infrastructure.
+7. Export the environment variables documented in the compose manifest so services can connect to the shared stack.
 
 ### Contributing
 - Open an issue describing the enhancement or bug prior to starting work.
