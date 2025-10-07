@@ -43,13 +43,11 @@ subprojects {
 
 layout.buildDirectory = file("build")
 
-// Aggregate lifecycle tasks so CI can target the root project even when no modules are present yet.
-tasks.named('check') {
-    dependsOn(subprojects*.tasks.matching { it.name == 'check' })
-}
-
 tasks.named('build') {
-    dependsOn(subprojects*.tasks.matching { it.name == 'build' })
+    dependsOn(subprojects.collectMany { it.tasks.matching { it.name == 'build' } })
+}
+tasks.named('check') {
+    dependsOn(subprojects.collectMany { it.tasks.matching { it.name == 'check' } })
 }
 
 tasks.register('bootstrap') {
