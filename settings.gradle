@@ -1,8 +1,3 @@
-rootProject.name = 'truerally-platform'
-
-// Add service modules here as they are implemented, for example:
-// include 'services:gateway', 'services:player'
-
 pluginManagement {
     repositories {
         gradlePluginPortal()
@@ -16,3 +11,9 @@ dependencyResolutionManagement {
         mavenCentral()
     }
 }
+
+
+rootProject.name = 'truerally-platform'
+
+// Add service modules here as they are implemented, for example:
+// include 'services:gateway', 'services:player'
