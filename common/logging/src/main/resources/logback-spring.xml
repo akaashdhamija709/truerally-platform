@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration scan="true">
+
+    <!-- Load spring properties -->
+    <springProperty scope="context" name="APP_NAME" source="spring.application.name" defaultValue="truerally-app"/>
+
+    <!-- Common pattern with MDC values -->
+    <property name="LOG_PATTERN"
+              value="%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level [${APP_NAME}] [cid:%X{correlationId}] [latency:%X{latencyMs}ms] [%thread] %logger{36} - %msg%n"/>
+
+    <!-- =============== Console appender =============== -->
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>${LOG_PATTERN}</pattern>
+        </encoder>
+    </appender>
+
+    <!-- =============== JSON appender (optional) =============== -->
+    <!-- Uncomment this section if you plan to send logs to ELK/Loki later -->
+    <!--
+    <appender name="JSON" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder class="net.logstash.logback.encoder.LogstashEncoder">
+            <fieldNames>
+                <timestamp>timestamp</timestamp>
+                <level>level</level>
+                <logger>logger</logger>
+                <thread>thread</thread>
+                <message>message</message>
+            </fieldNames>
+        </encoder>
+    </appender>
+    -->
+
+    <!-- =============== Log levels =============== -->
+    <logger name="org.springframework" level="WARN"/>
+    <logger name="org.hibernate" level="WARN"/>
+    <logger name="org.apache.kafka" level="WARN"/>
+    <logger name="com.truerally" level="INFO"/>
+
+    <!-- =============== Root logger =============== -->
+    <root level="INFO">
+        <appender-ref ref="CONSOLE"/>
+        <!-- <appender-ref ref="JSON"/> -->
+    </root>
+
+</configuration>

@@ -1,0 +1,43 @@
+server:
+  port: 8080
+
+spring:
+  config:
+    import:
+    - classpath:application-observability.yaml
+    - classpath:application-tracing.yaml
+
+  datasource:
+    url: jdbc:postgresql://postgres:5432/truerally
+    username: ${DB_USER:truerally_user}
+    password: ${DB_PASSWORD:securepassword}
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: update   # creates/updates schema in dev (switch off in prod)
+    show-sql: true
+
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: ${MAIL_USERNAME:akaash.dhamija709@gmail.com}
+    password: ${MAIL_PASSWORD:qpopvcygvgclbtyr}
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+
+jwt:
+  secret: JWT_SECRET=32chars-minimum-1234567890abcdef
+  access-token-validity-ms: 300000      # 5 minutes
+  refresh-token-validity-ms: 86400000   # 1 day
+  issuer: truerally-auth
+  ##secret: dev-please-change-me-32chars-minimum-123456
+
+management:
+  metrics:
+    tags:
+      application: auth-service

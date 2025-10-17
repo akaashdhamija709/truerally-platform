@@ -1,0 +1,15 @@
+management:
+  metrics:
+    distribution:
+      percentiles-histogram:
+        http.server.requests: true
+    enable:
+      jvm: true
+      system: true
+  tracing:
+    enabled: false   # set to true to enable tracing
+    sampling:
+      probability: 1.0     # capture 100% of requests (use 0.1 in prod)
+  otlp:
+    tracing:
+      endpoint: http://tempo:4318/v1/traces   # tempo container endpoint

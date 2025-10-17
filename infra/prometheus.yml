@@ -1,0 +1,15 @@
+global:
+  scrape_interval: 15s
+  evaluation_interval: 15s
+
+scrape_configs:
+  - job_name: 'auth-service'
+    metrics_path: '/actuator/prometheus'
+    static_configs:
+      - targets: ['auth-service:8080']
+
+# enable exemplar storage
+# (Prometheus 2.37+ required — you already have “latest”, so fine)
+storage:
+  exemplars:
+    max_exemplars: 100000
